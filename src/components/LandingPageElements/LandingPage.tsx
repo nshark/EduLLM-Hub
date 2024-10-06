@@ -5,6 +5,10 @@ export default function LandingPage(){
     <Navbar isLoggedIn={true} onLogout={() => {}}/>
 
     <p>Hello World</p>
+    <p>Hello World</p>
+    <p>Hello World</p>
+    <p>Hello World</p>
+    <p>Hello World</p>
     </div>
     )
 }
