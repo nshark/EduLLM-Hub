@@ -4,10 +4,16 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import LandingPage from './components/LandingPageElements/LandingPage'
 
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LandingPage/>,
+    element: <LandingPage isLoggedIn={false}/>,
   },
   
 ]);

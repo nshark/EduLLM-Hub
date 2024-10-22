@@ -31,6 +31,7 @@ ul {
     padding: 14px 16px;
   }
 
-  .dropdown {
-    background-color: darkslategray;
+  .Navbar-Main {
+    background-color: #242424;
+    width: 100%;
   }

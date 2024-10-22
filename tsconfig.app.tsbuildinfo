@@ -1,1 +1,1 @@
-{"root":["./src/main.tsx","./src/vite-env.d.ts","./src/components/landingpageelements/landingpage.tsx","./src/components/navbarelements/navbar.tsx"],"version":"5.6.2"}
+{"root":["./src/main.tsx","./src/vite-env.d.ts","./src/components/landingpageelements/landingpage.tsx","./src/components/landingpageelements/loginpage.tsx","./src/components/navbarelements/navbar.tsx"],"version":"5.6.2"}
