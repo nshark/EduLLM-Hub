@@ -7,17 +7,17 @@ import LandingPage from './components/LandingPageElements/LandingPage'
 declare global {
   interface Window {
     google: any;
+    isLoggedIn: boolean
   }
 }
-
+window.isLoggedIn=false;
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LandingPage isLoggedIn={false}/>,
+    element: <LandingPage/>,
   },
   
 ]);
-
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
    <RouterProvider router={router} />

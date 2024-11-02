@@ -1,17 +1,23 @@
 import Navbar from "../NavbarElements/Navbar"
 import LoginPage from "./LoginPage"
-export default function LandingPage({isLoggedIn} : {isLoggedIn:Boolean}){
+import { useState } from "react";
+export default function LandingPage(){
+    const [updateToggle, setUpdateToggle] = useState(false);
+
+    const forceParentUpdate = () => {
+    setUpdateToggle(!updateToggle);
+    };
     return(
     <div>
-    <Navbar isLoggedIn={false} onLogout={() => {}}/>
-    {isLoggedIn ? (<>
+    <Navbar isLoggedIn={window.isLoggedIn} onLogout={() => {}}/>
+    {window.isLoggedIn ? (<>
     <p>Hello World</p>
     <p>Hello World</p>
     <p>Hello World</p>
     <p>Hello World</p>
     <p>Hello World</p>
     </>
-    ) : ( <LoginPage/> )}
+    ) : ( <LoginPage forceParentUpdate={forceParentUpdate}/> )}
     </div>
     )
 }
