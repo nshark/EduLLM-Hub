@@ -1,5 +1,11 @@
 import { useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 // Mysterious code written by our overlord, CHATGPT
+interface GoogleUser {
+  name: string;
+  email: string;
+  // Add any other fields from Google's UserInfo if needed, like `picture`, `sub`, etc.
+}
 
 function LoginPage({forceParentUpdate} : {forceParentUpdate:()=>void}) {
   useEffect(() => {
@@ -31,8 +37,19 @@ function LoginPage({forceParentUpdate} : {forceParentUpdate:()=>void}) {
 
   const handleCredentialResponse = (response: any) => {
     console.log("Encoded JWT ID token: " + response.credential);
+    let decoded : GoogleUser = {name: 'Example User', email: 'bob@gmail.com'};
+    try {
+      decoded = jwtDecode<GoogleUser>(response.credential);
+    }
+    catch (error){
+      console.log("Jwt decoding failed: " + error)
+    }
     // Handle the token, e.g., send it to your server for verification
     window.isLoggedIn=true;
+    console.log("User Name: " + decoded.name);
+    console.log("User Email:" + decoded.email);
+    window.username = decoded.name;
+    window.useremail = decoded.email;
     forceParentUpdate();
   };
 

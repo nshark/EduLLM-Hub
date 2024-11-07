@@ -9,7 +9,7 @@ export default function LandingPage(){
     };
     return(
     <div>
-    <Navbar isLoggedIn={window.isLoggedIn} onLogout={() => {}}/>
+    <Navbar isLoggedIn={window.isLoggedIn} onLogout={() => {window.isLoggedIn = false; forceParentUpdate();}}/>
     {window.isLoggedIn ? (<>
     <p>Hello World</p>
     <p>Hello World</p>

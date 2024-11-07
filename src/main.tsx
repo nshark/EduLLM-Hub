@@ -8,9 +8,13 @@ declare global {
   interface Window {
     google: any;
     isLoggedIn: boolean
+    username: string
+    useremail: string
   }
 }
 window.isLoggedIn=false;
+window.username='';
+window.useremail='';
 const router = createBrowserRouter([
   {
     path: "/",

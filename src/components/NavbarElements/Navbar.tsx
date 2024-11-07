@@ -16,7 +16,7 @@ interface chat {
 function Navbar({ isLoggedIn, onLogout }: { isLoggedIn: boolean, onLogout: (e: React.MouseEvent) => void }) {
     //TODO Change this to access the database and requisition the resquite chats that this student has been assignened.
     const [chats] = useState<chat[]>([{ text: "Linear Algebra", id: "2md3m43k" }, { text: "Advanced AI", id: "24kjro5" }]);
-
+    
 
     return (
         <Navbar_Boostrap expand='lg' className='Navbar-Main' sticky='top'>
