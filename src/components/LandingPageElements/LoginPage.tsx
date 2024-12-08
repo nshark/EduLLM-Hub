@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 // Mysterious code written by our overlord, CHATGPT
 interface GoogleUser {
@@ -6,6 +6,39 @@ interface GoogleUser {
   email: string;
   // Add any other fields from Google's UserInfo if needed, like `picture`, `sub`, etc.
 }
+function getPersistedState<T>(key:string, defaultValue: T) {
+  try {
+    const storedValue = localStorage.getItem(key);
+    return storedValue ? JSON.parse(storedValue) : defaultValue;
+  } catch (error) {
+    console.error('Error parsing localStorage value:', error);
+    return defaultValue;
+  }
+}
+//TODO move this to a new seperate file for weird functions
+export function usePersistedState<T>(key: string, defaultValue: T): [T, React.Dispatch<React.SetStateAction<T>>] {
+  if (typeof window === 'undefined') {
+    throw new Error('usePersistedState must be used within a client-side component');
+  }
+  let state, setState = null;
+  try{
+    [state, setState] = useState<T>(getPersistedState(key, defaultValue));
+  }
+  catch(error){
+    console.log(error);
+    [state, setState] = useState<T>(defaultValue);
+  }
+  useEffect(() => {
+    try {
+      localStorage.setItem(key, JSON.stringify(state));
+    } catch (error) {
+      console.error('Error setting localStorage value:', error);
+    }
+  }, [key, state]);
+
+  return [state, setState];
+}
+
 
 function LoginPage({forceParentUpdate} : {forceParentUpdate:()=>void}) {
   useEffect(() => {
@@ -19,7 +52,7 @@ function LoginPage({forceParentUpdate} : {forceParentUpdate:()=>void}) {
     // Initialize Google Sign-In when the script loads
     script.onload = () => {
       window.google.accounts.id.initialize({
-        client_id: '',  // Replace with your Client ID
+        client_id: '1054276165051-cssopgikuc14vhqf0siotkg3pjsgsnkk.apps.googleusercontent.com',  // Replace with your Client ID
         callback: handleCredentialResponse
       });
 
@@ -45,18 +78,16 @@ function LoginPage({forceParentUpdate} : {forceParentUpdate:()=>void}) {
       console.log("Jwt decoding failed: " + error)
     }
     // Handle the token, e.g., send it to your server for verification
-    window.isLoggedIn=true;
+    window.setLoggedIn(true);
     console.log("User Name: " + decoded.name);
     console.log("User Email:" + decoded.email);
-    window.username = decoded.name;
-    window.useremail = decoded.email;
+    window.setUserName(decoded.name);
+    window.setUserEmail(decoded.email);
     forceParentUpdate();
   };
 
   return (
-    <div>
-      <div id="buttonDiv"></div> {/* This is where the button will be rendered */}
-    </div>
+    <div id="buttonDiv"></div>
   );
 };
 

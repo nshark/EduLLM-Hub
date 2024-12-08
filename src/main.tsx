@@ -1,8 +1,11 @@
-import { StrictMode } from 'react'
+import { StrictMode} from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import LandingPage from './components/LandingPageElements/LandingPage'
+
+
+
 
 declare global {
   interface Window {
@@ -10,11 +13,11 @@ declare global {
     isLoggedIn: boolean
     username: string
     useremail: string
+    setUserEmail: (arg0: string) => void
+    setUserName: (arg0: string) => void
+    setLoggedIn: (arg0: boolean) => void
   }
 }
-window.isLoggedIn=false;
-window.username='';
-window.useremail='';
 const router = createBrowserRouter([
   {
     path: "/",
