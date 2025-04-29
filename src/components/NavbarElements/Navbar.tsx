@@ -27,7 +27,7 @@ function Navbar({ isLoggedIn, onLogout }: { isLoggedIn: boolean, onLogout: (e: R
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/profile">Profile</Nav.Link>
                     <NavDropdown title="Chats" id="collapsible-nav-dropdown">
-                        {chats.map((element) => {return(<NavDropdown.Item href={"/chats?id="+element.id}>{element.text}</NavDropdown.Item>)})}
+                        {chats.map((element) => {return(<NavDropdown.Item href={"/chats/"+element.id}>{element.text}</NavDropdown.Item>)})}
                     </NavDropdown>
                     <Button onClick={onLogout}>Logout</Button>
                 </Nav>) : (

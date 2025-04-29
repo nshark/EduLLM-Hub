@@ -20,14 +20,7 @@ export function usePersistedState<T>(key: string, defaultValue: T): [T, React.Di
   if (typeof window === 'undefined') {
     throw new Error('usePersistedState must be used within a client-side component');
   }
-  let state, setState = null;
-  try{
-    [state, setState] = useState<T>(getPersistedState(key, defaultValue));
-  }
-  catch(error){
-    console.log(error);
-    [state, setState] = useState<T>(defaultValue);
-  }
+  let [state, setState] = useState<T>(getPersistedState(key, defaultValue));
   useEffect(() => {
     try {
       localStorage.setItem(key, JSON.stringify(state));
